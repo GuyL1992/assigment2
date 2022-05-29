@@ -5,11 +5,11 @@ import sys
 import mykmeanssp
 
 
-def calc_distance(vec1 :list[float] ,vec2: list[float]) -> float:
+def calc_distance(vec1, vec2):
     distance = np.sum(np.power(vec1.subtract(vec2),2)[1:])
     return (float(distance))
 
-def kmeans_pp (k: int,data_arr: pd.DataFrame, n: int,d: int): ## check the arguments 
+def kmeans_pp (k,data_arr,n,d): 
     np.random.seed(0)
     index_of_first_cntrd = np.random.choice(n)
     index_of_first_cntrd = (int) (merge_data_frame.loc[merge_data_frame[0] == index_of_first_cntrd].index[0])
@@ -67,7 +67,7 @@ def validate_input(k,max_iter,n,epsilon):
 
 
 
-def check_len(coordinate) -> str:
+def check_len(coordinate):
             str_coor = str(coordinate)
             str_coor_array = str_coor.split(".")
             curr_len = len(str_coor_array[1])
@@ -75,7 +75,7 @@ def check_len(coordinate) -> str:
                 str_coor = str_coor + '0'    
             return(str_coor)
 
-def print_final_centroids(k_centriods: list[list[float]]):
+def print_final_centroids(k_centriods):
     for centroid in k_centriods:
         print(",".join([check_len(round(coordinate,4)) for coordinate in centroid]))
 
