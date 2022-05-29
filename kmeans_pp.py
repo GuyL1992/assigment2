@@ -1,13 +1,7 @@
 
-from ast import arguments
-from inspect import _void
-from mimetypes import init
-from re import A
-from turtle import distance
 import pandas as pd
 import numpy as np
 import sys
-import math
 import mykmeanssp
 
 
