@@ -187,7 +187,7 @@ void createCentroids(int k, int maxiter, double **init, double **p, int n, int d
             }
             
             dis = calcdelta(prev,init[i],d);
-            //free(prev); 
+            free(prev); 
 
             if (dis < epsilon)
                 cnt += 1;
@@ -209,12 +209,12 @@ void createCentroids(int k, int maxiter, double **init, double **p, int n, int d
         
   
     }
-    //free(sizes);
+    free(sizes);
 
     for (i = 0; i < k; i++){
-             //free(addvectors[i]);
+        free(addvectors[i]);
     }
-    //free(addvectors);
+    free(addvectors);
 }
 
 static PyMethodDef _capiMethods[] = {
