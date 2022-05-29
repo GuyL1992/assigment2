@@ -56,7 +56,7 @@ static PyObject* k_means_api(PyObject *self, PyObject *args)
         exit(1);
         }
 
-    for(i = 0; i < n; i++){
+    for(i = 0; i < k; i++){
         init_centroids[i] = calloc(d,sizeof(double));
         if(init_centroids[i] == NULL){
         printf("An Error Has Occurred");
@@ -76,14 +76,14 @@ static PyObject* k_means_api(PyObject *self, PyObject *args)
             PyList_SetItem(curr_centroid,j,PyFloat_FromDouble(init_centroids[i][j]));
         }
         PyList_SetItem(k_centroids,i,curr_centroid);
-        //free(init_centroids[i]);
+        free(init_centroids[i]);
     }
-    //free(init_centroids);
+    free(init_centroids);
 
     for(i = 0; i < n; i++){
-       //free(vectors[i]);
+       free(vectors[i]);
     }
-    //free(vectors);
+    free(vectors);
 
     return k_centroids;
 
