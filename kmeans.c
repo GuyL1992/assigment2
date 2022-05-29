@@ -76,14 +76,14 @@ static PyObject* k_means_api(PyObject *self, PyObject *args)
             PyList_SetItem(curr_centroid,j,PyFloat_FromDouble(init_centroids[i][j]));
         }
         PyList_SetItem(k_centroids,i,curr_centroid);
-        free(init_centroids[i]);
+        //free(init_centroids[i]);
     }
-    free(init_centroids);
+    //free(init_centroids);
 
     for(i = 0; i < n; i++){
-       free(vectors[i]);
+       //free(vectors[i]);
     }
-    free(vectors);
+    //free(vectors);
 
     return k_centroids;
 
@@ -187,7 +187,7 @@ void createCentroids(int k, int maxiter, double **init, double **p, int n, int d
             }
             
             dis = calcdelta(prev,init[i],d);
-            free(prev); 
+            //free(prev); 
 
             if (dis < epsilon)
                 cnt += 1;
@@ -209,12 +209,12 @@ void createCentroids(int k, int maxiter, double **init, double **p, int n, int d
         
   
     }
-    free(sizes);
+    //free(sizes);
 
     for (i = 0; i < k; i++){
-             free(addvectors[i]);
+             //free(addvectors[i]);
     }
-    free(addvectors);
+    //free(addvectors);
 }
 
 static PyMethodDef _capiMethods[] = {
