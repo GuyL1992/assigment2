@@ -13,6 +13,8 @@ static void fill_matrix_of_points(PyObject* matrix_py, double** matrix_c, int n,
 double calcdelta (double *a, double *b, int d);
 void addtwovector (double *a, double *b, int d);
 void createCentroids(int k, int maxiter, double **init, double **p, int n, int d, double eps);
+static PyObject* kmeans_c(int k, int max_iter, int n, int d, PyObject* vector_py, int epsilon, PyObject* init_centroids_py);
+
 
 
 static PyObject* k_means_api(PyObject *self, PyObject *args)
@@ -22,19 +24,23 @@ static PyObject* k_means_api(PyObject *self, PyObject *args)
     int n;
     int d;
     int k;
-    int i;
-    int j;
     double epsilon;
     int max_iter;
-    double** vectors; 
-    double** init_centroids; 
-    PyObject* k_centroids; 
-    PyObject* curr_centroid;
-
-
+    
     if(!PyArg_ParseTuple(args,"iiiidOO",&n,&d,&k,&max_iter,&epsilon,&vectors_py,&init_centroids_py)){ 
         return NULL;
     }
+
+    return Py_BuildValue("O", kmeans_c(k, max_iter,n,d,vectors_py,epsilon,init_centroids_py));
+}
+
+PyObject* kmeans_c(int k, int max_iter, int n, int d, PyObject* vectors_py, int epsilon, PyObject* init_centroids_py){
+    double** vectors; 
+    double** init_centroids; 
+    int i;
+    int j;
+    PyObject* k_centroids; 
+    PyObject* curr_centroid;
 
     vectors = (double **)calloc(n, sizeof(double*));
     if(vectors == NULL){
@@ -86,8 +92,9 @@ static PyObject* k_means_api(PyObject *self, PyObject *args)
     free(vectors);
 
     return k_centroids;
+    
+} 
 
-}
 
 
 static void fill_matrix_of_points(PyObject* matrix_py, double** matrix_c, int n, int d){
@@ -240,6 +247,8 @@ PyInit_mykmeanssp(void)
     }
     return m;
 }
+//python3 setup.py build_ext --inplace
+//python3 kmeans_pp.py 3 100 0 input_1_db_1.txt input_1_db_2.txt 
 
 
 
