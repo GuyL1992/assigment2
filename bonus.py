@@ -16,9 +16,9 @@ y_axis = np.array(interias)
 
 plt.plot(x_axis,y_axis,color = "green", markevery = [1], marker='$◌$', markersize=20)
 
-plt.annotate("elbow",(2,interias[1]),  xycoords='data',
+plt.annotate("Elbow Point",(2,interias[1]),  xycoords='data',
             xytext=(0.4,0.4), textcoords="axes fraction",
-            arrowprops=dict(width = 0.001, facecolor='black', shrink=0.01),
+            arrowprops=dict(width = 0.001, facecolor='black', shrink=0.02),
             horizontalalignment='right', verticalalignment='top',
             )
 
