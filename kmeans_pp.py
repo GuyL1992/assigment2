@@ -17,8 +17,8 @@ def kmeans_pp(k,data_arr,n,d):
     first_centroid = np.random.choice(n)
 
     centroids_index = []
-    p_list = [0 for i in range(n)] #np.zeros((n), dtype=np.float64)
-    d_list = [np.inf for i in range (n)] #np.full(n, np.inf)
+    p_list =  np.zeros((n), dtype=np.float64) #[0 for i in range(n)]
+    d_list =  np.full(n, np.inf) # [np.inf for i in range (n)]
 
     centroids_index.append(first_centroid)
     d_sum = 0
@@ -29,7 +29,7 @@ def kmeans_pp(k,data_arr,n,d):
             curr_distance = calc_distance(data_arr.loc[i], new_centroid)
             if curr_distance < d_list[i]:
                 d_list[i] = curr_distance
-        d_sum = sum(d_list)
+        d_sum = d_list.sum()
 
         for i in range(n):
             p_list[i] = d_list[i] / d_sum
@@ -94,7 +94,9 @@ if __name__ == "__main__":
     k_centroids = mykmeanssp.fit(n, d, k, max_iter, epsilon, vectors, k_init_centroids)
     print(",".join([str(i) for i in first_init]))
     print_final_centroids(k_centroids)
+    #python3 kmeans_pp.py 15 750 0 input_3_db_1.txt input_3_db_2.txt
     #python3 kmeans_pp.py 3 100 0 input_1_db_1.txt input_1_db_2.txt
+    #python3 kmeans_pp.py 7 0 input_2_db_1.txt input_2_db_2.txt
 
 
     
